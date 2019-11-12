@@ -1,0 +1,21 @@
+{
+  "name": "node-fundamentals",
+  "version": "1.0.0",
+  "description": "Latihan Node.js Fundamental",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saggaf Arsyad <saggaf@nusantarabetastudio.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/lodash": "^4.14.146",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^12.12.7",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.20.1"
+  }
+}
