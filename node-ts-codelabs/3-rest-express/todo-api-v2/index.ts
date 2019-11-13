@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { initRouter } from './handler'
 import { initDb } from '../todo-api-v2/db'
+import { authMiddleware } from './middleware'
 
 async function startServer() {
   // Init app
@@ -10,6 +11,8 @@ async function startServer() {
   // Init db
   // TODO: Retrieve from env/process arg
   const db = await initDb()
+
+  app.use(authMiddleware)
 
   // Register middleware
   app.use(bodyParser.urlencoded({ extended: true }))
