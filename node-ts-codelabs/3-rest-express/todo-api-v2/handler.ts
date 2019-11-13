@@ -86,6 +86,18 @@ export const initRouter = (db: Connection): Router => {
     return resultId
   }
 
+  function composeTodoResp(data: ToDoModel): ToDoEntity {
+    let resp: ToDoEntity = {
+      id: data.id,
+      title: data.title,
+      content: data.content,
+      status: data.status,
+      createdAt: data.createdAt.getTime() / 1000,
+      updatedAt: data.updatedAt.getTime() / 1000,
+    }
+    return resp
+  }
+
   // Handlers
   const listTodoHandler = (req: express.Request, res: express.Response) => {
     // Get Filter by title
@@ -93,7 +105,15 @@ export const initRouter = (db: Connection): Router => {
 
     findTodo()
       .then(users => {
-        res.send(users)
+        // Compose response
+        let respData = users.map(v => composeTodoResp(v))        
+
+        let resBody = {
+          status: 'OK',
+          data: respData
+        }
+        
+        res.send(respData)
       })
       .catch(err => {
         console.error('unable to retrieve todos: ', err)
@@ -145,7 +165,7 @@ export const initRouter = (db: Connection): Router => {
         // Else, send success response
         let resBody = {
           status: 'OK',
-          data: todo
+          data: composeTodoResp(todo)
         }
 
         // Send
