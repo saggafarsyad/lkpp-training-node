@@ -44,11 +44,12 @@ export const initRouter = (db: Connection): Router => {
   }
 
   async function updateTodoById(id: number, title: string, content: string): Promise<boolean> {
+    let updatedAt = new Date()
     // Query Select Todo
     let result = await db
       .createQueryBuilder()
       .update(ToDoModel)
-      .set({ title, content })
+      .set({ title, content, updatedAt })
       .where('id = :id', { id })
       .execute()
 
