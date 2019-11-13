@@ -1,6 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import { deleteTodo, updateTodo, initRouter } from './handler'
+import { initRouter } from './handler'
 import { initDb } from '../todo-api-v2/db'
 
 async function startServer() {
@@ -18,10 +18,6 @@ async function startServer() {
   // Register routing
   const router = initRouter(db)
   app.use(router)
-
-  // Routing
-  app.put('/todo/:id', updateTodo) // Update a To Do
-  app.delete('/todo/:id', deleteTodo) // Delete a To Do
 
   // Start HTTP server
   const PORT = 3000
