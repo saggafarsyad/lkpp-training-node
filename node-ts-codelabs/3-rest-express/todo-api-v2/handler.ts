@@ -99,33 +99,32 @@ export const initRouter = (db: Connection): Router => {
   }
 
   // Handlers
-  const listTodoHandler = (req: express.Request, res: express.Response) => {
+  const listTodoHandler = async (req: express.Request, res: express.Response) => {
     // Get Filter by title
     let filterTitle = req.query.filter_title
 
-    findTodo()
-      .then(users => {
-        // Compose response
-        let respData = users.map(v => composeTodoResp(v))        
+    try {
+      let users = await findTodo()
 
-        let resBody = {
-          status: 'OK',
-          data: respData
-        }
-        
-        res.send(respData)
-      })
-      .catch(err => {
-        console.error('unable to retrieve todos: ', err)
+      let respData = users.map(v => composeTodoResp(v))
 
-        const resBody = {
-          code: '500',
-          message: 'Internal Error'
-        }
+      let resBody = {
+        status: 'OK',
+        data: respData
+      }
 
-        res.statusCode = 500
-        res.send(resBody)
-      })
+      res.send(resBody)
+    } catch (err) {
+      console.error('unable to retrieve todos: ', err)
+
+      const resBody = {
+        code: '500',
+        message: 'Internal Error'
+      }
+
+      res.statusCode = 500
+      res.send(resBody)
+    }
   }
 
   const getTodoHandler = (req: express.Request, res: express.Response) => {
