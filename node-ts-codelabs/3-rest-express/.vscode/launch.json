@@ -14,7 +14,8 @@
 			"protocol": "inspector",
 			"internalConsoleOptions": "openOnSessionStart",
 			"env": {
-				"TS_NODE_IGNORE": "false"
+				"TS_NODE_IGNORE": "false",
+				"CLIENT_SECRET": "123456"
 			}
 		}
   ]
