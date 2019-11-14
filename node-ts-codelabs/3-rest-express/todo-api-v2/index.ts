@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import { initRouter } from './handler'
 import { initDb } from '../todo-api-v2/db'
 import { authMiddleware } from './middleware'
+import { uploadFileHandler } from './upload_handler'
 
 async function startServer() {
   // Init app
@@ -22,9 +23,13 @@ async function startServer() {
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
 
+  
+
   // Register routing
   const router = initRouter(db)
   app.use(router)
+
+  app.post('/assets', uploadFileHandler)
 
   // Start HTTP server
   const PORT = 3000

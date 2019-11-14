@@ -60,7 +60,7 @@ export const initRouter = (db: Connection): Router => {
     return true
   }
 
-  async function insertTodo(title: string, content: string): Promise<number> {
+  async function insertTodo(title: string, content: string, attachedFile?: string): Promise<number> {
     let timestamp = new Date()
 
     // Create instance
@@ -68,6 +68,7 @@ export const initRouter = (db: Connection): Router => {
     todo.title = title
     todo.content = content
     todo.status = ToDoEntity.STATUS_DO
+    todo.attachedFile = attachedFile
     todo.createdAt = new Date()
     todo.updatedAt = new Date()
 
@@ -87,10 +88,17 @@ export const initRouter = (db: Connection): Router => {
   }
 
   function composeTodoResp(data: ToDoModel): ToDoEntity {
+    // Resolve attached file url
+    let url = ''
+    if (data.attachedFile) {
+      url = 'http://localhost:3000/assets/todo/' + data.attachedFile
+    }
+
     let resp: ToDoEntity = {
       id: data.id,
       title: data.title,
       content: data.content,
+      attachedFile: url, // TODO: Resolve url
       status: data.status,
       createdAt: data.createdAt.getTime() / 1000,
       updatedAt: data.updatedAt.getTime() / 1000,
@@ -188,7 +196,7 @@ export const initRouter = (db: Connection): Router => {
     let todo = req.body
 
     // Insert Todo to database
-    insertTodo(todo.title, todo.content)
+    insertTodo(todo.title, todo.content, todo.attached_file)
       .then(id => {
         // Compose dummy response
         let resBody = {
