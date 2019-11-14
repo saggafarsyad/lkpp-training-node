@@ -12,6 +12,10 @@ async function startServer() {
   // TODO: Retrieve from env/process arg
   const db = await initDb()
 
+
+  // Static folder
+  app.use('/assets',express.static('uploads'))
+
   app.use(authMiddleware)
 
   // Register middleware
