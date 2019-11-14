@@ -23,6 +23,9 @@ export class ToDoModel {
   @Column()
   content: string
 
+  @Column({name: 'attached_file', nullable: true})
+  attachedFile?: string
+
   @ManyToOne(type => ToDoStatusModel, masterData => masterData.id)
   @JoinColumn({name: 'status_id'})
   status: number

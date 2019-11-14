@@ -2,6 +2,7 @@ export class ToDoEntity {
   id: number
   title: string
   content: string
+  attachedFile: string
   status: number
   createdAt: number
   updatedAt: number
