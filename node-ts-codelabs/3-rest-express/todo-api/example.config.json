@@ -1,0 +1,10 @@
+{
+  "server.portBind": 3000,
+  "server.baseUrl": "http://localhost:3000",
+  "server.clientSecret": "123456",
+  "datasources.todoDb.host": "localhost",
+  "datasources.todoDb.port": "3306",
+  "datasources.todoDb.user": "root",
+  "datasources.todoDb.pass": "root",
+  "datasources.todoDb.dbName": "localdev_bootcamp_node_db"
+}
