@@ -13,7 +13,7 @@
     "@types/minimist": "^1.2.0",
     "@types/node": "^12.12.7",
     "lodash": "^4.17.15",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.3"
   },
   "devDependencies": {
     "tslint": "^5.20.1"
